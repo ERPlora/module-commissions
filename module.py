@@ -25,3 +25,9 @@ DEPENDENCIES = ['staff', 'services', 'inventory', 'sales', 'appointments']
 PERMISSIONS = [
     'commissions.manage_settings',
 ]
+
+ROLE_PERMISSIONS = {
+    "admin": ["*"],
+    "manager": [],
+    "employee": [],
+}
