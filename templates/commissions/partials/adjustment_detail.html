@@ -116,10 +116,10 @@ async function deleteAdjustment() {
         const response = await fetch('{% url "commissions:adjustment_delete" adjustment.id %}', {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'}
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:adjustment_list" %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:adjustment_list" %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.error || '{% trans "Error deleting adjustment" %}', 'error');
         }

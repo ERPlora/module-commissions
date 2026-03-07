@@ -120,10 +120,10 @@ async function createRule() {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'},
             body: form
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:rule_list" %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:rule_list" %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.errors ? Object.values(data.errors).flat().join(', ') : '{% trans "Error creating rule" %}', 'error');
         }

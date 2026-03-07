@@ -174,10 +174,10 @@ async function toggleRule() {
         const response = await fetch('{% url "commissions:rule_toggle" rule.id %}', {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'}
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:rule_detail" rule.id %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:rule_detail" rule.id %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.error || '{% trans "Error toggling rule" %}', 'error');
         }
@@ -195,10 +195,10 @@ async function deleteRule() {
         const response = await fetch('{% url "commissions:rule_delete" rule.id %}', {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'}
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:rule_list" %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:rule_list" %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.error || '{% trans "Error deleting rule" %}', 'error');
         }

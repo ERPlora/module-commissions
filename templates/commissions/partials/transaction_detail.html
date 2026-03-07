@@ -138,10 +138,10 @@
             const response = await fetch('{% url "commissions:transaction_approve" transaction.id %}', {
                 method: 'POST',
                 headers: {'X-CSRFToken': '{{ csrf_token }}'}
-            });
+            },
             const data = await response.json();
             if (data.success) {
-                htmx.ajax('GET', '{% url "commissions:transaction_detail" transaction.id %}', {target: '#main-content-area', pushUrl: true});
+                htmx.ajax('GET', '{% url "commissions:transaction_detail" transaction.id %}', {target: '#main-content-area', pushUrl: true},
             } else {
                 showToast(data.error || '{% trans "Error approving transaction" %}', 'error');
             }
@@ -158,10 +158,10 @@
                 method: 'POST',
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 body: form
-            });
+            },
             const data = await response.json();
             if (data.success) {
-                htmx.ajax('GET', '{% url "commissions:transaction_detail" transaction.id %}', {target: '#main-content-area', pushUrl: true});
+                htmx.ajax('GET', '{% url "commissions:transaction_detail" transaction.id %}', {target: '#main-content-area', pushUrl: true},
             } else {
                 showToast(data.error || '{% trans "Error rejecting transaction" %}', 'error');
             }

@@ -216,10 +216,10 @@ async function approvePayout() {
         const response = await fetch('{% url "commissions:payout_approve" payout.id %}', {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'}
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:payout_detail" payout.id %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:payout_detail" payout.id %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.error || '{% trans "Error approving payout" %}', 'error');
         }
@@ -236,10 +236,10 @@ async function cancelPayout() {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'},
             body: form
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:payout_detail" payout.id %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:payout_detail" payout.id %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.error || '{% trans "Error cancelling payout" %}', 'error');
         }
@@ -256,10 +256,10 @@ async function processPayout() {
             method: 'POST',
             headers: {'X-CSRFToken': '{{ csrf_token }}'},
             body: form
-        });
+        },
         const data = await response.json();
         if (data.success) {
-            htmx.ajax('GET', '{% url "commissions:payout_detail" payout.id %}', {target: '#main-content-area', pushUrl: true});
+            htmx.ajax('GET', '{% url "commissions:payout_detail" payout.id %}', {target: '#main-content-area', pushUrl: true},
         } else {
             showToast(data.error || '{% trans "Error processing payout" %}', 'error');
         }
