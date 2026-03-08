@@ -71,7 +71,11 @@
                    class="list-item list-item-clickable">
                     <div class="list-item-start">
                         <div class="w-10 h-10 rounded-lg bg-{% if rule.is_active %}primary{% else %}gray{% endif %}/10 flex items-center justify-center">
-                            {% icon "options-outline" css_class="text-xl text-{% if rule.is_active %}primary{% else %}muted{% endif %}" %}
+                            {% if rule.is_active %}
+                            {% icon "options-outline" css_class="text-xl text-primary" %}
+                            {% else %}
+                            {% icon "options-outline" css_class="text-xl text-muted" %}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="list-item-content">

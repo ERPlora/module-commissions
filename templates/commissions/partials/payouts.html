@@ -82,7 +82,15 @@
                    class="list-item list-item-clickable">
                     <div class="list-item-start">
                         <div class="w-10 h-10 rounded-lg bg-{% if payout.status == 'completed' %}success{% elif payout.status == 'pending' %}warning{% elif payout.status == 'approved' %}primary{% else %}gray{% endif %}/10 flex items-center justify-center">
-                            {% icon "cash-outline" css_class="text-xl text-{% if payout.status == 'completed' %}success{% elif payout.status == 'pending' %}warning{% elif payout.status == 'approved' %}primary{% else %}muted{% endif %}" %}
+                            {% if payout.status == 'completed' %}
+                            {% icon "cash-outline" css_class="text-xl text-success" %}
+                            {% elif payout.status == 'pending' %}
+                            {% icon "cash-outline" css_class="text-xl text-warning" %}
+                            {% elif payout.status == 'approved' %}
+                            {% icon "cash-outline" css_class="text-xl text-primary" %}
+                            {% else %}
+                            {% icon "cash-outline" css_class="text-xl text-muted" %}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="list-item-content">
