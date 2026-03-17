@@ -109,3 +109,69 @@ class CreateCommissionRule(AssistantTool):
             priority=args.get('priority', 10),
         )
         return {"id": str(r.id), "name": r.name, "rate": str(r.rate), "created": True}
+
+
+@register_tool
+class UpdateCommissionRule(AssistantTool):
+    name = "update_commission_rule"
+    description = "Update a commission rule's name, rate, dates, or priority."
+    module_id = "commissions"
+    required_permission = "commissions.change_commissionrule"
+    requires_confirmation = True
+    parameters = {
+        "type": "object",
+        "properties": {
+            "rule_id": {"type": "string", "description": "Commission rule ID"},
+            "name": {"type": "string"},
+            "rule_type": {"type": "string", "description": "flat, percentage, tiered"},
+            "rate": {"type": "string", "description": "Commission rate"},
+            "effective_from": {"type": "string", "description": "Start date (YYYY-MM-DD)"},
+            "effective_until": {"type": "string", "description": "End date (YYYY-MM-DD)"},
+            "priority": {"type": "integer"},
+            "is_active": {"type": "boolean"},
+        },
+        "required": ["rule_id"],
+        "additionalProperties": False,
+    }
+
+    def execute(self, args, request):
+        from decimal import Decimal
+        from commissions.models import CommissionRule
+        try:
+            r = CommissionRule.objects.get(id=args['rule_id'])
+        except CommissionRule.DoesNotExist:
+            return {"error": "Commission rule not found"}
+        for field in ('name', 'rule_type', 'effective_from', 'effective_until', 'priority', 'is_active'):
+            if args.get(field) is not None:
+                setattr(r, field, args[field])
+        if args.get('rate') is not None:
+            r.rate = Decimal(args['rate'])
+        r.save()
+        return {"id": str(r.id), "name": r.name, "updated": True}
+
+
+@register_tool
+class DeleteCommissionRule(AssistantTool):
+    name = "delete_commission_rule"
+    description = "Delete a commission rule."
+    module_id = "commissions"
+    required_permission = "commissions.delete_commissionrule"
+    requires_confirmation = True
+    parameters = {
+        "type": "object",
+        "properties": {
+            "rule_id": {"type": "string", "description": "Commission rule ID"},
+        },
+        "required": ["rule_id"],
+        "additionalProperties": False,
+    }
+
+    def execute(self, args, request):
+        from commissions.models import CommissionRule
+        try:
+            r = CommissionRule.objects.get(id=args['rule_id'])
+        except CommissionRule.DoesNotExist:
+            return {"error": "Commission rule not found"}
+        name = r.name
+        r.delete()
+        return {"name": name, "deleted": True}
