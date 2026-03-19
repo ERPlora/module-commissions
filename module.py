@@ -2,7 +2,11 @@ from django.utils.translation import gettext_lazy as _
 
 MODULE_ID = 'commissions'
 MODULE_NAME = _('Commissions')
-MODULE_VERSION = '1.0.0'
+MODULE_VERSION = '1.0.1'
+MODULE_ICON = 'wallet-outline'
+MODULE_DESCRIPTION = _('Sales commission rules, tracking, and payouts')
+MODULE_AUTHOR = 'ERPlora'
+MODULE_CATEGORY = 'sales'
 
 MENU = {
     'label': _('Commissions'),
