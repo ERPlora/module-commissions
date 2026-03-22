@@ -110,7 +110,7 @@
     </div>
 </div>
 
-<script>
+<script nonce="{{ csp_nonce }}">
 async function createRule() {
     const form = new FormData();
     form.append('name', document.getElementById('rule-name').value);

@@ -168,7 +168,7 @@
     {% endif %}
 </div>
 
-<script>
+<script nonce="{{ csp_nonce }}">
 async function toggleRule() {
     try {
         const response = await fetch('{% url "commissions:rule_toggle" rule.id %}', {

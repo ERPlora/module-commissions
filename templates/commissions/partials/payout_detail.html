@@ -209,7 +209,7 @@
 </div>
 
 {% if payout.status == 'pending' or payout.status == 'approved' %}
-<script>
+<script nonce="{{ csp_nonce }}">
 async function approvePayout() {
     if (!confirm('{% trans "Approve this payout?" %}')) return;
     try {

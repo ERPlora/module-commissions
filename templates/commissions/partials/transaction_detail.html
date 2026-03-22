@@ -131,7 +131,7 @@
         </button>
     </div>
 
-    <script>
+    <script nonce="{{ csp_nonce }}">
     async function approveTransaction(id) {
         if (!confirm('{% trans "Approve this commission transaction?" %}')) return;
         try {

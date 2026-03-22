@@ -130,7 +130,7 @@
     </div>
 </div>
 
-<script>
+<script nonce="{{ csp_nonce }}">
 async function createAdjustment() {
     const form = new FormData();
     form.append('staff_id', document.getElementById('adj-staff-id').value);

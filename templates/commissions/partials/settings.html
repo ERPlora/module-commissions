@@ -254,7 +254,7 @@
     </div>
 </div>
 
-<script>
+<script nonce="{{ csp_nonce }}">
 function resetSettings() {
     if (confirm('{% trans "Reset all settings to defaults?" %}')) {
         fetch('{% url "commissions:settings_reset" %}', {

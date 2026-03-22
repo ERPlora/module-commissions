@@ -109,7 +109,7 @@
 </div>
 
 {% if not adjustment.payout %}
-<script>
+<script nonce="{{ csp_nonce }}">
 async function deleteAdjustment() {
     if (!confirm('{% trans "Are you sure you want to delete this adjustment?" %}')) return;
     try {
