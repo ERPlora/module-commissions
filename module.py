@@ -7,6 +7,7 @@ MODULE_ICON = 'wallet-outline'
 MODULE_DESCRIPTION = _('Sales commission rules, tracking, and payouts')
 MODULE_AUTHOR = 'ERPlora'
 MODULE_CATEGORY = 'sales'
+HAS_MODELS = True
 
 MENU = {
     'label': _('Commissions'),
